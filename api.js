@@ -19,7 +19,6 @@ const fetchMovieList = async () => {
         }, 500)
     })
 }
-
 const fetchMovieAvailability = async (movieName) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
