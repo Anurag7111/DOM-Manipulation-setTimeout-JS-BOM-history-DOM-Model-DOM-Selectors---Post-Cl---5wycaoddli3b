@@ -1,21 +1,21 @@
 import {fetchMovieAvailability,fetchMovieList} from "./api.js";
 
-var loader = document.getElementById('loader');
-var main = document.getElementById("main");
-console.log(main)
-loader.addEventListener('load', myFunction)
-// var setT;
-function myFunction() {
-    console.log("myFunction");
-    const setTimeOut = setTimeout(showPage, 3000);
-    // setT = setTimeout(showPage, 3000);
-}
+// var loader = document.getElementById('loader');
+// var main = document.getElementById("main");
+// console.log(main)
+// loader.addEventListener('load', myFunction)
+// // var setT;
+// function myFunction() {
+//     console.log("myFunction");
+//     const setTimeOut = setTimeout(showPage, 3000);
+//     // setT = setTimeout(showPage, 3000);
+// }
 
-function showPage() {
-    console.log('showPage');
-    main.style.display = "block";
-    loader.style.display = "none";
-}
+// function showPage() {
+//     console.log('showPage');
+//     main.style.display = "block";
+//     loader.style.display = "none";
+// }
 
 
 let count = 0;
