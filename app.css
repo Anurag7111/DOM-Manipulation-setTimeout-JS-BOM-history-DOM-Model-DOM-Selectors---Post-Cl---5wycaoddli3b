@@ -104,18 +104,19 @@ li a:hover {
   width: 10vh;
   border: 1px solid black;
   margin: 1vh;
+  font-size: 2vh;
   cursor: pointer;
 }
-#customer-detail-form  {
+/* #customer-detail-form  {
   text-align: center;
   margin: 2vh;
-}
+} */
 label {
   font-size: 2vh;
 }
 input {
   font-size: 2vh;
-  margin: 20px 0px;
+  /* margin: 20px 0px; */
 }
 button {
   font-size: 2vh;
@@ -140,10 +141,16 @@ button {
   border: 4px outset rgb(0, 0, 0)
 }
 .main div, h3{
-  text-align: center;
+  /* text-align: center; */
   font-size: 2vh;
 }
 h3, h4 {
-  margin-top: 1vh;
+  /* margin-top: 1vh; */
   font-size: 2vh;
+}
+#confirm-purchase,
+#Success {
+  text-align: left;
+  position: absolute;
+  left: 45%;
 }

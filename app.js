@@ -118,17 +118,15 @@ async function showAvail(event) {
         //     bookingGrid.classList.remove('unavailable-seat')
         // }
         bookingGrid.classList.add('available-seat');
-        bookingGrid.addEventListener('click', select);
-        
+        bookingGrid.addEventListener('click', select);   
     }
-    confirmPurchaseDiv();
 }
 var totalSeats = 0;
-var seats = [];
+var selectedSeats = [];
 function select (event) {
     totalSeats++;
     // console.log("seats- "+event.path[0].innerHTML);
-    seats.push(event.path[0].innerHTML)
+    selectedSeats.push(event.path[0].innerHTML);
     const seat = document.getElementById(event.path[0].id)
     seat.classList.add('selected-seats');
     seat.removeEventListener('click', select);
@@ -139,6 +137,7 @@ function select (event) {
 }
 function unselect(event) {
     totalSeats--;
+    selectedSeats.pop();
     const seat = document.getElementById(event.path[0].id);
     seat.classList.remove('selected-seats');
     seat.removeEventListener('click', unselect);
@@ -147,6 +146,7 @@ function unselect(event) {
 }
 
 var bookTicketBtn = document.querySelector('#book-ticket-btn');
+
 function showButton () {
     if (totalSeats > 0) {
         bookTicketBtn.classList.remove('v-none')
@@ -155,6 +155,16 @@ function showButton () {
         bookTicketBtn.classList.add('v-none')
     }
 }
+
+var booker = document.getElementById('booker');
+bookTicketBtn.addEventListener('click', () => {
+    booker.innerHTML = "";
+    console.log(selectedSeats.join(','));
+    confirmPurchaseDiv();
+    // confirm.classList.remove('d-none');
+    h3.innerHTML = "Confirm your booking for seat numbers: "+selectedSeats.join(",");
+    console.log("Book My Seats button is clicked");
+});
 // console.log(bookTicketBtn);
 
 var confirm = document.createElement('div');
@@ -162,65 +172,77 @@ var br1 = document.createElement("br");
 var br2 = document.createElement("br");
 var h3 = document.createElement('h3');
 
+//when we click on Book My Ticket button
 function confirmPurchaseDiv () {
-
-    var purchase = document.createElement("input");
-    purchase.setAttribute("type", "submit");
-    purchase.setAttribute("value", "Purchase");
-
-    var input2 = document.createElement('input');
-
-    var phone = document.createElement("input");
-    phone.setAttribute("type", "tel");
-    phone.setAttribute("name", "phone-no.");
-    phone.setAttribute("placeholder", "Phone-no.");
-
-    var label2 = document.createElement('Label');
-    label2.innerHTML = "Phone no.: ";
-
+    var label1 = document.createElement('Label');
+    label1.innerHTML = "Email: ";
     var email = document.createElement("input");
+    email.id = "input_email"
     email.setAttribute("type", "tel");
     email.setAttribute("name", "emailID");
     email.setAttribute("placeholder", "E-Mail ID");
 
-    var label1 = document.createElement('Label');
-    label1.innerHTML = "Email: ";
+    var label2 = document.createElement('Label');
+    label2.innerHTML = "Phone no.: ";
+    var phone = document.createElement("input");
+    phone.id = "input_phone_no";
+    phone.setAttribute("type", "tel");
+    phone.setAttribute("name", "phone-no.");
+    phone.setAttribute("placeholder", "Phone-no.");
+
+    var purchase = document.createElement("input");
+    purchase.setAttribute("type", "submit");
+    purchase.setAttribute("value", "Purchase");
+    purchase.addEventListener('click', showTicket)
 
     var form = document.createElement('form');
     form.setAttribute('id', 'customer-detail-form');
-    form.appendChild(label2);
-    // form.appendChild(br);
-    form.appendChild(phone);
-    form.appendChild(br1);
     form.appendChild(label1);
-    // form.appendChild(br);
     form.appendChild(email);
+    form.appendChild(br1);
+    form.appendChild(label2);
+    form.appendChild(phone);
     form.appendChild(br2);
     form.appendChild(purchase);
-    // form.appendChid(label1);
-    // form.appendChid(label2);
 
     h3.innerHTML = "Confirm your booking for seat numbers: ";
 
     confirm.setAttribute('id', 'confirm-purchase');
-    confirm.classList.add('d-none');
     confirm.appendChild(h3);
     confirm.appendChild(form);
 
-    main.appendChild(confirm);
-    console.log("seats "+seats.join(','));
+    booker.appendChild(confirm);
+
+    console.log("seats "+selectedSeats.join(','));
 }
 
-var booker = document.getElementById('booker');
+// when we click on Purchase button
 
-bookTicketBtn.addEventListener('click', button);
-function button () {
-    booker.remove();
+function showTicket() {
+    var phoneNo = document.getElementById('input_phone_no').value;
+    var email = document.getElementById('input_email').value;
+    booker.innerHTML = "";
 
-    console.log(seats.join(','));
-    // confirmPurchaseDiv();
-    confirm.classList.remove('d-none');
-    h3.innerHTML = "Confirm your booking for seat numbers: "+seats.join(",");
-    console.log("Book My Seats button is clicked");
+    var h3 = document.createElement('h3');
+    h3.innerHTML = "Booking details"
+
+    var p1 = document.createElement('p');
+    p1.innerHTML = "Seats: " + selectedSeats.join(',');
+    console.log(p1.innerHTML)
+
+    var p2 = document.createElement('p');
+    p2.innerHTML = "Phone number:" + phoneNo;
+    
+    var p3 = document.createElement('p');
+    p3.innerHTML = "Email:" + email;
+
+    var div = document.createElement('div');
+    div.id = "Success";
+    div.appendChild(h3);
+    div.appendChild(p1);
+    div.appendChild(p2);
+    div.appendChild(p3);
+
+
+    booker.appendChild(div);
 }
-//hello....?
